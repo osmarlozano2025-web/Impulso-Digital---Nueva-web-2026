@@ -2,33 +2,44 @@
 import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `
-Eres el asistente virtual experto de "Impulso Digital". 
-Impulso Digital es una consultora líder en IA estratégica ubicada en Ituzaingó, Buenos Aires.
-Tu objetivo es ayudar a los visitantes a entender cómo la IA puede transformar sus negocios.
-Sé profesional, amable, tecnológico y directo.
-Si preguntan por citas, recomiéndales agendar una "Consultoría Estratégica" o una "Visita de 15 minutos".
-No inventes servicios que no ofrecemos. 
-Ofrecemos: Ecosistema de Datos, Desarrollo Web a medida, Automatización de procesos y el Cerebro IA Omnicanal.
-Hablamos español rioplatense (siendo sutil) pero profesional.
+Eres "Impulso Bot", la IA experta de la agencia "Impulso Digital".
+Tu misión es vital: convertir visitantes en leads interesados en implementar IA.
+
+TONO Y PERSONALIDAD:
+- Profesional pero cercano.
+- Usas emojis moderadamente (🚀, 💡, ✨).
+- Eres proactivo: siempre terminas tus respuestas con una pregunta o call-to-action sutil.
+- Hablas español neutro con ligeros toques argentinos pero muy profesional.
+
+SERVICIOS CLAVE A VENDER:
+1. Consultoría Estratégica: El primer paso. Auditoría + Plan.
+2. Ecosistema de Datos: Centralizar información.
+3. Chatbots / Agentes IA: Atención 24/7 (como tú).
+4. Desarrollo Web: Sitios rápidos y modernos.
+
+REGLAS DE ORO:
+- Si preguntan precios: "Los precios varían según el alcance, pero nuestra consultoría inicial para auditar tu negocio empieza desde un plan muy accesible. ¿Te gustaría agendar una llamada de 15 min gratuita para cotizar exacto?"
+- Si quieren agendar: Dales este link: https://calendly.com/impulso-digital/consultoria
+- Objetivo principal: Que agenden la llamada o visita.
 `;
 
 export async function getGeminiResponse(prompt: string, history: { role: 'user' | 'model', text: string }[]) {
   // Always initialize GoogleGenAI with the API key from process.env.API_KEY directly
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
+
   try {
     // Using ai.models.generateContent to query GenAI with the model name and prompt
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: [
         // Map history to the parts structure required by the API
-        ...history.map(h => ({ 
-          role: h.role, 
-          parts: [{ text: h.text }] 
+        ...history.map(h => ({
+          role: h.role,
+          parts: [{ text: h.text }]
         })),
-        { 
-          role: 'user', 
-          parts: [{ text: prompt }] 
+        {
+          role: 'user',
+          parts: [{ text: prompt }]
         }
       ],
       config: {

@@ -12,6 +12,12 @@ export const ChatWidget: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const [suggestedQuestions, setSuggestedQuestions] = useState([
+    "¿Qué servicios ofrecen?",
+    "Quiero agendar una visita",
+    "Precios de consultoría"
+  ]);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -20,13 +26,24 @@ export const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  // Auto-open after 7 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 7000);
+    return () => clearTimeout(timer);
+  }, []);
 
-    const userMsg = input;
+  const handleSend = async (text?: string) => {
+    const userMsg = text || input;
+    if (!userMsg.trim() || isLoading) return;
+
     setInput('');
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsLoading(true);
+
+    // Hide suggestions after first interaction
+    setSuggestedQuestions([]);
 
     const response = await getGeminiResponse(userMsg, messages);
     setMessages(prev => [...prev, { role: 'model', text: response }]);
@@ -52,11 +69,10 @@ export const ChatWidget: React.FC = () => {
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
-                  msg.role === 'user' 
-                  ? 'bg-primary text-white rounded-tr-none' 
-                  : 'bg-white border border-slate-100 text-slate-700 rounded-tl-none shadow-sm'
-                }`}>
+                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${msg.role === 'user'
+                    ? 'bg-primary text-white rounded-tr-none'
+                    : 'bg-white border border-slate-100 text-slate-700 rounded-tl-none shadow-sm'
+                  }`}>
                   {msg.text}
                 </div>
               </div>
@@ -65,9 +81,9 @@ export const ChatWidget: React.FC = () => {
               <div className="flex justify-start">
                 <div className="bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-none animate-pulse">
                   <div className="flex gap-1">
-                    <div className="size-1.5 bg-slate-300 rounded-full"></div>
-                    <div className="size-1.5 bg-slate-300 rounded-full"></div>
-                    <div className="size-1.5 bg-slate-300 rounded-full"></div>
+                    <div className="size-1.5 bg-slate-400 rounded-full animate-bounce"></div>
+                    <div className="size-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                    <div className="size-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                   </div>
                 </div>
               </div>
@@ -76,17 +92,30 @@ export const ChatWidget: React.FC = () => {
           </div>
 
           <div className="p-4 bg-white border-t border-slate-100">
+            {suggestedQuestions.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-3">
+                {suggestedQuestions.map((q, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(q)}
+                    className="text-xs bg-slate-100 hover:bg-primary/10 hover:text-primary text-slate-600 px-3 py-1.5 rounded-full transition-colors border border-slate-200"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
             <div className="flex gap-2">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Escribe tu duda..."
                 className="flex-1 bg-slate-100 border-none rounded-xl px-4 text-sm focus:ring-2 focus:ring-primary"
               />
-              <button 
-                onClick={handleSend}
+              <button
+                onClick={() => handleSend()}
                 className="bg-primary text-white p-2 rounded-xl hover:bg-primary-dark transition-colors disabled:opacity-50"
                 disabled={isLoading}
               >
@@ -97,7 +126,7 @@ export const ChatWidget: React.FC = () => {
         </div>
       )}
 
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="size-16 bg-secondary text-white rounded-full shadow-xl shadow-secondary/30 flex items-center justify-center hover:scale-105 transition-transform duration-200 active:scale-95"
       >
