@@ -21,7 +21,11 @@ export const ACTION_LINKS = {
   APP_WEB: "https://app.impulsodigital.de",
 
   // 5. Contacto
-  CONTACTO_EMAIL: "mailto:info2@impulsodigital.de"
+  CONTACTO_EMAIL: "mailto:info2@impulsodigital.de",
+
+  // 6. Whapify
+  WHAPIFY_BOOKING_URL: "https://ap.whapify.ai/booking/?id=21153&p=6195639&u=1000117658522672692&c=10712977&l=es&ch=9",
+  WHAPIFY_BOT_URL: "https://ap.whapify.ai/bots/6195639/l/1761776914607"
 };
 
 export const CONTACT_INFO = {
