@@ -1,0 +1,8 @@
+{
+  "name": "Impulso Digital - Nueva web 2026",
+  "description": "Plataforma líder en consultoría y desarrollo de inteligencia artificial estratégica para empresas, ayudando a escalar negocios mediante tecnología humana y eficiente.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

@@ -1,0 +1,28 @@
+
+/**
+ * CONFIGURACIÓN DE ENLACES EXTERNOS
+ */
+export const ACTION_LINKS = {
+  // 1. Enlaces de Calendly
+  CONSULTORIA_ESTRATEGICA: "https://calendly.com/impulso-digital/consultoria", 
+  VISITA_15_MIN: "https://calendly.com/impulso-digital/15-minutos",            
+  DEMO_IA: "https://calendly.com/impulso-digital/demo",                       
+  
+  // 2. Canales de Comunicación
+  WHATSAPP_SUPPORT: "https://wa.me/542996313782",
+  GOOGLE_MAPS_LOCATION: "https://maps.google.com/?q=Ituzaingo,Buenos+Aires",
+  
+  // 3. Redes Sociales
+  INSTAGRAM: "https://instagram.com/impulsodigital.de",
+  FACEBOOK: "https://www.facebook.com/app.impulsodigital.de",
+  
+  // 4. Ecosistema Web
+  MAIN_WEB: "https://impulsodigital.de",
+  APP_WEB: "https://app.impulsodigital.de"
+};
+
+export const CONTACT_INFO = {
+  PHONE: "+54 299 6313-782",
+  LOCATION: "Ituzaingó, Buenos Aires",
+  EMAIL: "info2@impulsodigital.de" 
+};
