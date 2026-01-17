@@ -2,27 +2,48 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { ACTION_LINKS } from '../constants';
+import { useBooking } from '../components/BookingModal';
+import { motion } from 'framer-motion';
+import { AIInsights } from '../components/AIInsights';
 
 export const CerebroPage: React.FC = () => {
+  const { openBooking } = useBooking();
+
   return (
     <div className="w-full">
-      <section className="bg-slate-900 text-white py-24 lg:py-32 relative">
+      <section className="bg-slate-900 text-white py-24 lg:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div className="absolute -top-24 -right-24 size-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div className="relative mx-auto max-w-7xl px-4 text-center">
-          <h1 className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter"
+          >
             Cerebro <span className="text-primary">IA Omnicanal</span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12"
+          >
             La inteligencia que entiende, siente y conecta con tus clientes 24/7 en cualquier plataforma.
-          </p>
-          <Button href={ACTION_LINKS.DEMO_IA} target="_blank" variant="secondary" className="px-12 py-5 text-xl">Solicitar Demo en Vivo</Button>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Button onClick={openBooking} variant="secondary" className="px-12 py-5 text-xl">Solicitar Demo en Vivo</Button>
+          </motion.div>
         </div>
       </section>
 
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-6">
-            <h2 className="text-4xl font-black text-slate-900">Empatía Digital Escalamble</h2>
+            <h2 className="text-4xl font-black text-slate-900">Empatía Digital Escalable</h2>
             <p className="text-lg text-slate-600 leading-relaxed">
               Nuestro "Cerebro IA" no es un bot de respuestas fijas. Es un modelo entrenado específicamente con los datos de tu empresa para ofrecer soluciones personalizadas con detección de sentimientos.
             </p>
@@ -44,10 +65,20 @@ export const CerebroPage: React.FC = () => {
               ))}
             </ul>
           </div>
-          <div className="relative">
-             <img src="https://picsum.photos/seed/brain/800/800" className="rounded-3xl shadow-3xl grayscale hover:grayscale-0 transition-all duration-700" alt="Brain Concept" />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" className="rounded-3xl shadow-3xl border border-slate-100" alt="Brain Concept" />
+            <div className="absolute inset-0 bg-primary/5 rounded-3xl"></div>
+          </motion.div>
         </div>
+      </section>
+
+      <section className="bg-slate-50 border-t border-slate-100">
+        <AIInsights variant="cerebro" title="El Futuro de la Interacción Humano-IA" className="max-w-7xl mx-auto px-4" />
       </section>
     </div>
   );

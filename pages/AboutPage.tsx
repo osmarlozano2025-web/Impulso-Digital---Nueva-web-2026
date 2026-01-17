@@ -2,8 +2,11 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { ACTION_LINKS } from '../constants';
+import { useBooking } from '../components/BookingModal';
 
 export const AboutPage: React.FC = () => {
+    const { openBooking } = useBooking();
+
     return (
         <div className="w-full bg-white">
             {/* Hero */}
@@ -71,8 +74,8 @@ export const AboutPage: React.FC = () => {
             {/* Contact Simple */}
             <section className="py-24 px-4 bg-white text-center">
                 <h2 className="text-4xl font-black text-slate-900 mb-8">Hablemos de tu Proyecto</h2>
-                <Button href={ACTION_LINKS.CONTACTO_EMAIL} target="_blank" variant="primary" className="px-10 py-5 text-lg">
-                    Contactar al Equipo
+                <Button onClick={openBooking} variant="primary" className="px-10 py-5 text-lg">
+                    Agendar una Llamada
                 </Button>
             </section>
         </div>

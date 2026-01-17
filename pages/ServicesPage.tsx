@@ -2,8 +2,12 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { ACTION_LINKS } from '../constants';
+import { useBooking } from '../components/BookingModal';
+import { AIInsights } from '../components/AIInsights';
 
 export const ServicesPage: React.FC = () => {
+    const { openBooking } = useBooking();
+
     const services = [
         {
             icon: 'psychology',
@@ -20,7 +24,7 @@ export const ServicesPage: React.FC = () => {
         {
             icon: 'smart_toy',
             title: 'Chatbots & Asistentes Virtuales',
-            description: 'Implementamos "Cerebros Digitales" entrenados con tu información empresarial para atender clientes 24/7 con empatía humana.',
+            description: 'Implementamos "Cerebros Digitales" entrenados con tu información empresarial para atender clientes 24/7 con recibir consultas.',
             features: ['Atención Omnicanal', 'Detección de Sentimientos', 'Agendamiento Automático']
         },
         {
@@ -80,13 +84,17 @@ export const ServicesPage: React.FC = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <Button href={ACTION_LINKS.CONSULTORIA_ESTRATEGICA} target="_blank" variant="outline" fullWidth className="group-hover:bg-primary group-hover:text-white group-hover:border-primary">
+                                <Button onClick={openBooking} variant="outline" fullWidth className="group-hover:bg-primary group-hover:text-white group-hover:border-primary">
                                     Consultar Ahora
                                 </Button>
                             </div>
                         ))}
                     </div>
                 </div>
+            </section>
+
+            <section className="bg-slate-50 border-t border-slate-100">
+                <AIInsights variant="services" title="El Futuro de tus Servicios" className="max-w-7xl mx-auto px-4" />
             </section>
 
             {/* CTA Section */}
@@ -98,7 +106,7 @@ export const ServicesPage: React.FC = () => {
                         Cada negocio es único. Agenda una llamada exploratoria y diseñemos una solución a la medida de tus necesidades específicas.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button href={ACTION_LINKS.CONSULTORIA_ESTRATEGICA} target="_blank" variant="primary" className="px-8 py-4 text-lg">
+                        <Button onClick={openBooking} variant="primary" className="px-8 py-4 text-lg">
                             Agendar Consultoría
                         </Button>
                         <Button href={ACTION_LINKS.WHATSAPP_SUPPORT} target="_blank" className="px-8 py-4 text-lg bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm">

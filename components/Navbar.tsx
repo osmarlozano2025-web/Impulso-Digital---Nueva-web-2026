@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './Button';
 import { ACTION_LINKS } from '../constants';
+import { useBooking } from './BookingModal';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { openBooking } = useBooking();
 
   const links = [
     { name: 'Inicio', path: '/' },
@@ -33,12 +35,11 @@ export const Navbar: React.FC = () => {
         {/* Desktop Links */}
         <div className="hidden lg:flex flex-1 justify-center gap-6">
           {links.map((link) => (
-            <Link 
-              key={link.path} 
+            <Link
+              key={link.path}
               to={link.path}
-              className={`text-sm font-bold transition-colors hover:text-primary ${
-                location.pathname === link.path ? 'text-primary' : 'text-slate-600'
-              }`}
+              className={`text-sm font-bold transition-colors hover:text-primary ${location.pathname === link.path ? 'text-primary' : 'text-slate-600'
+                }`}
             >
               {link.name}
             </Link>
@@ -46,14 +47,13 @@ export const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4 shrink-0">
-          {/* Se eliminó h-10 para que el padding py-2 del botón controle el tamaño correctamente */}
-          <Button href={ACTION_LINKS.CONSULTORIA_ESTRATEGICA} target="_blank" variant="primary" className="py-2.5 px-6">
-            Consultoría
+          <Button onClick={openBooking} variant="primary" className="py-2.5 px-6 shadow-md shadow-primary/20">
+            Reservar Cita
           </Button>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
           className="lg:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-lg"
           aria-label="Toggle menu"
@@ -66,19 +66,21 @@ export const Navbar: React.FC = () => {
       {isOpen && (
         <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-5">
           {links.map((link) => (
-            <Link 
-              key={link.path} 
-              to={link.path} 
+            <Link
+              key={link.path}
+              to={link.path}
               onClick={() => setIsOpen(false)}
               className="text-lg font-bold text-slate-900 py-2 border-b border-slate-50"
             >
               {link.name}
             </Link>
           ))}
-          <Button 
-            href={ACTION_LINKS.CONSULTORIA_ESTRATEGICA} 
-            target="_blank" 
-            fullWidth 
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              openBooking();
+            }}
+            fullWidth
             className="mt-4 py-4"
           >
             Agendar Consultoría

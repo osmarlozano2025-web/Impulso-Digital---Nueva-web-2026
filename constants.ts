@@ -3,10 +3,9 @@
  * CONFIGURACIÓN DE ENLACES EXTERNOS
  */
 export const ACTION_LINKS = {
-  // 1. Enlaces de Calendly
-  CONSULTORIA_ESTRATEGICA: "https://calendly.com/impulso-digital/consultoria",
-  VISITA_15_MIN: "https://calendly.com/impulso-digital/15-minutos",
-  DEMO_IA: "https://calendly.com/impulso-digital/demo",
+  // 1. Whapify Booking & Bot
+  BOOKING_URL: "https://ap.whapify.ai/booking/?id=21153&p=6195639&u=1000117658522672692&c=10712977&l=es&ch=9",
+  WHAPIFY_BOT_URL: "https://ap.whapify.ai/bots/6195639/l/1761776914607",
 
   // 2. Canales de Comunicación
   WHATSAPP_SUPPORT: "https://wa.me/542996313782",
@@ -22,10 +21,6 @@ export const ACTION_LINKS = {
 
   // 5. Contacto
   CONTACTO_EMAIL: "mailto:info2@impulsodigital.de",
-
-  // 6. Whapify
-  WHAPIFY_BOOKING_URL: "https://ap.whapify.ai/booking/?id=21153&p=6195639&u=1000117658522672692&c=10712977&l=es&ch=9",
-  WHAPIFY_BOT_URL: "https://ap.whapify.ai/bots/6195639/l/1761776914607"
 };
 
 export const CONTACT_INFO = {

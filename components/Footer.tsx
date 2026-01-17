@@ -17,27 +17,27 @@ export const Footer: React.FC = () => {
               Transformando datos en crecimiento real mediante soluciones de IA estratégica a medida para cada negocio.
             </p>
             <div className="flex gap-4">
-              <a 
-                href={ACTION_LINKS.INSTAGRAM} 
-                target="_blank" 
+              <a
+                href={ACTION_LINKS.INSTAGRAM}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/5 rounded-lg hover:bg-secondary/20 transition-colors flex items-center justify-center"
                 title="Instagram @impulsodigital.de"
               >
                 <img src="https://cdn.simpleicons.org/instagram/white" className="size-5" alt="Instagram" />
               </a>
-              <a 
-                href={ACTION_LINKS.FACEBOOK} 
-                target="_blank" 
+              <a
+                href={ACTION_LINKS.FACEBOOK}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/5 rounded-lg hover:bg-primary/20 transition-colors flex items-center justify-center"
                 title="Facebook"
               >
                 <img src="https://cdn.simpleicons.org/facebook/white" className="size-5" alt="Facebook" />
               </a>
-              <a 
-                href={ACTION_LINKS.WHATSAPP_SUPPORT} 
-                target="_blank" 
+              <a
+                href={ACTION_LINKS.WHATSAPP_SUPPORT}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/5 rounded-lg hover:bg-green-500/20 transition-colors flex items-center justify-center"
                 title="WhatsApp"
@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© 2025 Impulso Digital. Todos los derechos reservados. Hecho con ❤️</p>
+          <p>© 2026 Impulso Digital. Todos los derechos reservados.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white">Privacidad</a>
             <a href="#" className="hover:text-white">Términos</a>

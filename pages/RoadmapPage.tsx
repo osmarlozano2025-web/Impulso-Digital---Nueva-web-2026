@@ -2,30 +2,33 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { ACTION_LINKS } from '../constants';
+import { useBooking } from '../components/BookingModal';
 
 export const RoadmapPage: React.FC = () => {
+  const { openBooking } = useBooking();
+
   const steps = [
-    { 
-      phase: "Fase 01", 
-      title: "Diagnóstico 360", 
+    {
+      phase: "Fase 01",
+      title: "Diagnóstico 360",
       desc: "Auditamos tus procesos actuales para encontrar los 'cuellos de botella' donde la IA tendrá más impacto.",
       icon: "biotech"
     },
-    { 
-      phase: "Fase 02", 
-      title: "Estructura Base", 
+    {
+      phase: "Fase 02",
+      title: "Estructura Base",
       desc: "Creamos los cimientos digitales y unificamos tus fuentes de datos para alimentar a los modelos de IA.",
       icon: "architecture"
     },
-    { 
-      phase: "Fase 03", 
-      title: "Activación de Cerebro", 
+    {
+      phase: "Fase 03",
+      title: "Activación de Cerebro",
       desc: "Desplegamos el Cerebro IA en tus canales de contacto y automatizamos el flujo de atención al cliente.",
       icon: "smart_toy"
     },
-    { 
-      phase: "Fase 04", 
-      title: "Escalado Predictivo", 
+    {
+      phase: "Fase 04",
+      title: "Escalado Predictivo",
       desc: "Usamos los datos generados para predecir ventas y optimizar costos de manera proactiva.",
       icon: "trending_up"
     }
@@ -42,7 +45,7 @@ export const RoadmapPage: React.FC = () => {
         <div className="relative">
           {/* Vertical line for desktop */}
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2"></div>
-          
+
           <div className="space-y-12 lg:space-y-32">
             {steps.map((step, i) => (
               <div key={i} className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-0 ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
@@ -65,7 +68,7 @@ export const RoadmapPage: React.FC = () => {
         </div>
 
         <div className="mt-24 text-center">
-          <Button href={ACTION_LINKS.CONSULTORIA_ESTRATEGICA} target="_blank" variant="primary" className="px-16 py-6 text-xl">
+          <Button onClick={openBooking} variant="primary" className="px-16 py-6 text-xl">
             Inicia tu Ascenso Hoy
           </Button>
         </div>
